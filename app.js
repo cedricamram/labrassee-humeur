@@ -1,11 +1,11 @@
-// Humeur du boss — client commun (vote, statut, device hash, slides rotation)
+// Humeur du boss — client commun (vote, statut, device hash, pioche aléatoire stable par jour)
 // Apollon-Marketing 2026-05-21
 
 export const SUPABASE_URL = "https://xjlpttrziisldlclhsth.supabase.co";
 export const SUPABASE_KEY = "sb_publishable_qG5XGinXYpNpGbmUyjej-Q_-eADJKcW";
 export const VOTE_URL = "https://humeur.labrassee.cafe/";
 
-// 35 variantes — 7 par niveau (rotation jour de la semaine, dim→sam)
+// 35 variantes — 7 par niveau, pioche aléatoire stable par jour
 export const VARIANTS = [
   // Niveau 0 — La pire (autodérision crue, ours grognon assumé)
   [
@@ -110,9 +110,13 @@ export async function getStatus() {
   return await res.json().catch(() => ({ ok: false }));
 }
 
-function dayOfWeekMtl() {
+// Pioche pseudo-aléatoire stable par jour (Mtl) — chaque jour, chaque niveau a sa variante
+function pickToday(lvl) {
   const mtl = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Toronto" }));
-  return mtl.getDay();
+  const ymd = mtl.getFullYear() * 10000 + (mtl.getMonth() + 1) * 100 + mtl.getDate();
+  let seed = (ymd ^ (lvl * 2654435761)) >>> 0;
+  seed = (Math.imul(seed, 1103515245) + 12345 + lvl * 7919) >>> 0;
+  return seed % VARIANTS[lvl].length;
 }
 
 export function currentSlide(status) {
@@ -126,7 +130,7 @@ export function currentSlide(status) {
   }
   const median = Number(status?.stats?.median_vote);
   const lvl = Math.max(0, Math.min(4, Math.round(median)));
-  const variant = VARIANTS[lvl][dayOfWeekMtl()];
+  const variant = VARIANTS[lvl][pickToday(lvl)];
   return { kind: "humeur", lvl, ...variant, votes: nb };
 }
 
