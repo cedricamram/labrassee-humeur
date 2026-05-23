@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TV cuisine — preview slides</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Lato:wght@300;400;700&display=swap">
+<style>
+  :root {
+    --brand:#f7d135; --accent:#cdc49d; --dark:#100f09; --dark-alt:#181716;
+    --cream:#f1efe4;
+    --font-din: "Oswald","DIN Condensed","Arial Narrow",sans-serif;
+    --font-body: "Lato","Arial",system-ui,sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--dark); color: var(--cream);
+    font-family: var(--font-body); padding: 16px 12px 80px;
+    min-height: 100vh;
+  }
+  header {
+    text-align:center; padding: 8px 0 18px;
+    border-bottom: 1px solid rgba(247,209,53,.2);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: var(--font-din); font-size: 22px; letter-spacing: .12em;
+    color: var(--brand); text-transform: uppercase; font-weight: 700;
+  }
+  .subtitle {
+    font-size: 12px; color: var(--accent); margin-top: 6px;
+    letter-spacing: .05em;
+  }
+  .legend {
+    background: rgba(247,209,53,.06);
+    border: 1px solid rgba(247,209,53,.25);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 18px;
+    font-size: 13px; line-height: 1.5; color: var(--cream);
+  }
+  .legend b { color: var(--brand); }
+  .legend ul { margin: 6px 0 0 16px; }
+
+  .section-title {
+    font-family: var(--font-din); font-size: 14px; letter-spacing: .25em;
+    color: var(--brand); text-transform: uppercase; font-weight: 600;
+    margin: 22px 0 10px; padding-left: 4px;
+  }
+  .section-title .count { color: var(--accent); font-weight: 400; margin-left: 6px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 480px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 800px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .card {
+    background: var(--dark-alt);
+    border: 1px solid rgba(247,209,53,.18);
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,.4);
+    cursor: pointer;
+    transition: transform .15s ease;
+  }
+  .card:active { transform: scale(.98); }
+  .card img {
+    width: 100%; height: auto; display: block;
+    aspect-ratio: 16/9; object-fit: cover;
+    background: #000;
+  }
+  .card .meta {
+    padding: 10px 12px;
+    font-size: 12px; color: var(--cream);
+    border-top: 1px solid rgba(247,209,53,.12);
+  }
+  .card .meta .num {
+    color: var(--brand); font-family: var(--font-din);
+    font-weight: 700; margin-right: 6px;
+  }
+  .card .meta .duration {
+    color: var(--accent); float: right; font-size: 11px;
+  }
+
+  /* Modal plein écran */
+  .lightbox {
+    position: fixed; inset: 0; background: rgba(0,0,0,.96);
+    z-index: 100; display: none; align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 100%; max-height: 100%; object-fit: contain;
+  }
+  .lightbox .close {
+    position: absolute; top: 16px; right: 20px;
+    color: var(--brand); font-size: 28px; cursor: pointer;
+    background: rgba(0,0,0,.5); border-radius: 50%;
+    width: 44px; height: 44px; display: flex;
+    align-items: center; justify-content: center;
+  }
+  .lightbox .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    color: var(--brand); font-size: 32px; cursor: pointer;
+    background: rgba(0,0,0,.5); border-radius: 50%;
+    width: 50px; height: 50px; display: flex;
+    align-items: center; justify-content: center;
+  }
+  .lightbox .nav.prev { left: 16px; }
+  .lightbox .nav.next { right: 16px; }
+  .lightbox .info {
+    position: absolute; bottom: 16px; left: 16px; right: 16px;
+    text-align: center; color: var(--cream); font-size: 13px;
+    background: rgba(0,0,0,.7); padding: 8px 14px; border-radius: 6px;
+  }
+
+  footer {
+    text-align: center; margin-top: 30px; padding-top: 18px;
+    border-top: 1px solid rgba(247,209,53,.15);
+    color: var(--accent); font-size: 11px; line-height: 1.7;
+  }
+  footer a { color: var(--brand); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>TV cuisine — preview</h1>
+  <div class="subtitle">22 slides actuellement en boucle sur la TV cuisine · cycle ≈ 4m43s</div>
+</header>
+
+<div class="legend">
+  <b>État actuel :</b>
+  <ul>
+    <li>11 slides Apollon (ouvert · today · tomorrow · météo · service · smoothies · prix · news mtl · news intl · grilled cheese · 7 ans)</li>
+    <li>1 slide rabais étudiant (-10%, charte)</li>
+    <li>10 slides events (1 par événement à venir, avec photo)</li>
+  </ul>
+  <b>À régler par Cédric :</b>
+  <ul>
+    <li>Slide météo (slide_3) → pas beau, pas cadré → à refaire</li>
+    <li>Slide terrasse → on dit "pas de terrasse cette année, on a choisi la clim. Parc Molson = notre terrasse"</li>
+    <li>ILAM (event_02) → photo afropop sénégalaise reçue, à intégrer</li>
+    <li>Vernissage Carole (event_01) → vérifier rendu hero</li>
+  </ul>
+</div>
+
+<div class="section-title">Slides Apollon <span class="count" id="cnt-a"></span></div>
+<div class="grid" id="grid-a"></div>
+
+<div class="section-title">Slide promo <span class="count" id="cnt-p"></span></div>
+<div class="grid" id="grid-p"></div>
+
+<div class="section-title">Events à venir <span class="count" id="cnt-e"></span></div>
+<div class="grid" id="grid-e"></div>
+
+<footer>
+  La Brassée · TV cuisine vitrine intérieure<br>
+  Page générée le <span id="now"></span> par Apollon-Marketing<br>
+  Source : Ablesign #506810 (cuisine) via mirror Mac
+</footer>
+
+<div class="lightbox" id="lb" onclick="if(event.target.id==='lb')close()">
+  <div class="close" onclick="close()">×</div>
+  <div class="nav prev" onclick="prev()">‹</div>
+  <div class="nav next" onclick="next()">›</div>
+  <img id="lb-img">
+  <div class="info" id="lb-info"></div>
+</div>
+
+<script>
+const slides = [
+  // Apollon (11)
+  { f: "slide_0.jpg",  num: "00", section: "a", title: "Ours bonjour", dur: 12 },
+  { f: "slide_1.jpg",  num: "01", section: "a", title: "Aujourd'hui (events soir)", dur: 10 },
+  { f: "slide_2.jpg",  num: "02", section: "a", title: "Demain (events lendemain)", dur: 10 },
+  { f: "slide_3.jpg",  num: "03", section: "a", title: "Météo Montréal", dur: 20 },
+  { f: "slide_4.jpg",  num: "04", section: "a", title: "Service · café · cuisine", dur: 16 },
+  { f: "slide_5.jpg",  num: "05", section: "a", title: "Smoothies maison", dur: 14 },
+  { f: "slide_6.jpg",  num: "06", section: "a", title: "Prix toutes taxes incluses", dur: 7 },
+  { f: "slide_7.jpg",  num: "07", section: "a", title: "Bonne nouvelle Montréal · 150 ans Mont-Royal", dur: 12 },
+  { f: "slide_8.jpg",  num: "08", section: "a", title: "Bonne nouvelle internationale · Alzheimer", dur: 12 },
+  { f: "slide_9.jpg",  num: "09", section: "a", title: "Grilled cheese du jour", dur: 22 },
+  { f: "slide_10.jpg", num: "10", section: "a", title: "7 ans La Brassée", dur: 26 },
+  // Promo
+  { f: "slide_rabais-etudiant.jpg", num: "R", section: "p", title: "Rabais étudiant -10% (charte Apollon)", dur: 10 },
+  // Events (10)
+  { f: "event_00_2026-05-23_Zekira_Yassa___Jam_Jazz___Soul.jpg", num: "E1", section: "e", title: "23 mai · Zékira Yassa — Jam Jazz & Soul", dur: 10, date: "Ce soir" },
+  { f: "event_01_2026-05-24_Vernissage_Sur_nos_murs___5_a_7.jpg", num: "E2", section: "e", title: "24 mai · Vernissage Rémanences — Carole Arseneau", dur: 10, date: "Demain" },
+  { f: "event_02_2026-05-26_ILAM.jpg", num: "E3", section: "e", title: "26 mai · ILAM", dur: 10, date: "Cette semaine" },
+  { f: "event_03_2026-05-28_Jazz___Jam_Manouche.jpg", num: "E4", section: "e", title: "28 mai · Jazz & Jam Manouche", dur: 10, date: "Cette semaine" },
+  { f: "event_04_2026-05-29_Chhannavath_Lmut___Une_Brassee_de_Poesie.jpg", num: "E5", section: "e", title: "29 mai · Chhannavath Lmut — Poésie + micro ouvert", dur: 10, date: "Cette semaine" },
+  { f: "event_05_2026-05-30_Hugndazz___Reprises_festives_70s_a_aujou.jpg", num: "E6", section: "e", title: "30 mai · HügnDäzz — Reprises festives", dur: 10, date: "Cette semaine" },
+  { f: "event_06_2026-06-02_Domlebo___Petit_mardi_du_2_juin.jpg", num: "E7", section: "e", title: "2 juin · Domlebo — Petit mardi", dur: 10, date: "Dans deux semaines" },
+  { f: "event_07_2026-06-04_Les_Cordes_Sensibles___Soiree_chanson.jpg", num: "E8", section: "e", title: "4 juin · Les Cordes Sensibles — Soirée chanson", dur: 10, date: "Dans deux semaines" },
+  { f: "event_08_2026-06-05_Trio_Choro_de_Quintal___Soiree_Bresilien.jpg", num: "E9", section: "e", title: "5 juin · Trio Choro de Quintal — Brésilienne", dur: 10, date: "Dans deux semaines" },
+  { f: "event_09_2026-06-06_Jeunes_Musiciens_du_Monde___Soiree_benef.jpg", num: "E10", section: "e", title: "6 juin · Jeunes Musiciens du Monde — Bénéfice", dur: 10, date: "À venir" },
+];
+
+const grids = { a: document.getElementById("grid-a"), p: document.getElementById("grid-p"), e: document.getElementById("grid-e") };
+const counts = { a: 0, p: 0, e: 0 };
+
+slides.forEach((s, i) => {
+  counts[s.section]++;
+  const card = document.createElement("div");
+  card.className = "card";
+  card.onclick = () => open(i);
+  card.innerHTML = `
+    <img src="${s.f}" alt="${s.title}" loading="lazy">
+    <div class="meta">
+      <span class="duration">${s.dur}s</span>
+      <span class="num">${s.num}</span>${s.title}
+    </div>
+  `;
+  grids[s.section].appendChild(card);
+});
+document.getElementById("cnt-a").textContent = `(${counts.a})`;
+document.getElementById("cnt-p").textContent = `(${counts.p})`;
+document.getElementById("cnt-e").textContent = `(${counts.e})`;
+
+let lbIdx = 0;
+function open(i) {
+  lbIdx = i;
+  document.getElementById("lb-img").src = slides[i].f;
+  document.getElementById("lb-info").textContent = `${i+1}/${slides.length} · ${slides[i].title} · ${slides[i].dur}s`;
+  document.getElementById("lb").classList.add("open");
+}
+function close() { document.getElementById("lb").classList.remove("open"); }
+function prev() { open((lbIdx - 1 + slides.length) % slides.length); }
+function next() { open((lbIdx + 1) % slides.length); }
+document.addEventListener("keydown", e => {
+  if (!document.getElementById("lb").classList.contains("open")) return;
+  if (e.key === "Escape") close();
+  if (e.key === "ArrowLeft") prev();
+  if (e.key === "ArrowRight") next();
+});
+
+document.getElementById("now").textContent = new Date().toLocaleString("fr-CA");
+</script>
+
+</body>
+</html>
