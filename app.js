@@ -52,7 +52,7 @@ export const VARIANTS = [
     { e: "🤩",  t: "Euphorique",                m: "Demandez-lui n'importe quoi. C'est le jour." },
     { e: "🎁",  t: "Mode bonus",                m: "Sourires gratuits avec chaque commande." },
     { e: "🏆",  t: "Conditions exceptionnelles",m: "Profitez tant que ça dure. Stocks limités." },
-    { e: "🐝",  t: "Heureux comme Maïa",        m: "Même l'abeille en parle. C'est dire." },
+    { e: "🌟",  t: "Heureux comme un roi",        m: "Journée parfaite. Profitez-en tant que ça dure." },
     { e: "🎰",  t: "Triple combo",              m: "Bon café, bon karma, bonne humeur. Jackpot." },
     { e: "📈",  t: "Phase ascendante",          m: "Il rit. Il rit fort. Il rit encore." },
     { e: "🌟",  t: "Mode bénédiction",          m: "Tout le monde repart avec un sourire en bonus." }
@@ -77,7 +77,7 @@ export async function getDeviceHash() {
     id = (crypto.randomUUID && crypto.randomUUID()) || (Math.random().toString(36).slice(2) + Date.now());
     localStorage.setItem("lb_humeur_device", id);
   }
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("lb-maia-" + id));
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("lb-humeur-" + id));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }
 
